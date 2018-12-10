@@ -7,7 +7,7 @@ fun main() {
         val env = Env()
         println("${Thread.currentThread()}:Start Env")
         env.start()
-        println("${Thread.currentThread()}:Sleep for 5 secs")
+        println("${Thread.currentThread()}:Sleep for 2 secs")
         Thread.sleep(2000)
         println("${Thread.currentThread()}:Stop Env")
         env.stop()
