@@ -8,7 +8,7 @@ fun main() {
         println("${Thread.currentThread()}:Start Env")
         env.start()
         println("${Thread.currentThread()}:Sleep for 5 secs")
-        Thread.sleep(2000)
+        Thread.sleep(1100)
         println("${Thread.currentThread()}:Stop Env")
         env.stop()
         println("${Thread.currentThread()}:END")
@@ -34,13 +34,13 @@ class Env : CoroutineScope {
 fun withTimingLogged(block: () -> Unit) {
     val start = System.currentTimeMillis()
     block.invoke()
-    println("${Thread.currentThread()}:DONE after ${(System.currentTimeMillis() - start) / 1000} secs")
+    println("${Thread.currentThread()}:DONE after ${(System.currentTimeMillis() - start)} millisecs")
 }
 
 suspend fun withTimingLoggedForDoWork(index: Int, block: suspend () -> Unit) {
     val start = System.currentTimeMillis()
     block.invoke()
-    println("$index==${Thread.currentThread()}:DONE after ${(System.currentTimeMillis() - start) / 1000} secs")
+    println("$index==${Thread.currentThread()}:DONE after ${(System.currentTimeMillis() - start)} millisecs")
 }
 
 fun CoroutineScope.doWork(index: Int) {
