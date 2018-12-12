@@ -7,8 +7,8 @@ fun main() {
         val env = Env()
         println("${Thread.currentThread()}:Start Env")
         env.start()
-        println("${Thread.currentThread()}:Sleep for 5 secs")
-        Thread.sleep(1100)
+        println("${Thread.currentThread()}:Sleep for 2 secs")
+        Thread.sleep(2000)
         println("${Thread.currentThread()}:Stop Env")
         env.stop()
         println("${Thread.currentThread()}:END")
@@ -21,7 +21,7 @@ class Env : CoroutineScope {
         get() = job + Dispatchers.Default
 
     fun start() {
-        repeat(3) {
+        repeat(5) {
             launch { doWork(it) }
         }
     }
