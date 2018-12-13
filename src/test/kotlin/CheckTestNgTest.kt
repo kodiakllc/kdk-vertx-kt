@@ -1,26 +1,23 @@
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.testng.annotations.Test
 
-enum class Direction {
-  north
-}
-
-class Car {
-  fun drive(direction: Direction): Boolean {
+class Bus {
+  suspend fun drive(direction: Direction): Boolean {
+    delay(1000)
     println("driving $direction")
     return true
   }
 }
 
-class CheckTestNgTest {
-  private val car: Car = mockk()
+class CheckBusTestNgTest {
+  private val bus: Bus = mockk()
 
   @Test
   fun testCheck() {
-    every { car.drive(Direction.north) } returns true
-    car.drive(Direction.north) // returns OK
-    verify { car.drive(Direction.north) }
+    coEvery { bus.drive(Direction.north) } returns true
+    runBlocking { bus.drive(Direction.north) }
+    coVerify { bus.drive(Direction.north) }
   }
 }
