@@ -22,11 +22,15 @@ kotlin {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
     implementation("io.github.microutils:kotlin-logging:1.6.22")
     implementation("ch.qos.logback:logback-classic:1.0.13")
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0-RC")
+    // Jackson
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.2")
     // Vert.x
     implementation("io.vertx:vertx-web:3.9.16")
     implementation("io.vertx:vertx-lang-kotlin:3.9.16")
