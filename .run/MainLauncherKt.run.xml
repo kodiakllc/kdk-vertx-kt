@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="WebVerticleKt" type="JetRunConfigurationType" nameIsGenerated="true">
-    <option name="MAIN_CLASS_NAME" value="WebVerticleKt" />
+  <configuration default="false" name="MainLauncherKt" type="JetRunConfigurationType" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="dev.kdk.twodata.MainLauncherKt" />
     <module name="kdk-vertx-kt.main" />
     <shortenClasspath name="NONE" />
     <method v="2">

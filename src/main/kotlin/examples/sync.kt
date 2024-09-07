@@ -1,22 +1,20 @@
-import kotlinx.coroutines.*
+package examples
 
 import java.lang.Math.abs
 import kotlin.random.Random
 
-suspend fun main() = coroutineScope {
+fun main() {
     val start = System.currentTimeMillis()
     println("${Thread.currentThread()}:Start")
     listOf("A","B","C").map {
-        async { getStock(it) }
-    }.map {
-        println(it.await())
+        println(getStock(it))
     }
     println("${Thread.currentThread()}" +
             ":Ended after ${(System.currentTimeMillis() - start) / 1000} secs")
 }
 
-private suspend fun getStock(stock: String): String {
+private fun getStock(stock: String): String {
     println("${Thread.currentThread()}:getStock for $stock")
-    delay(1000)
+    Thread.sleep(1000)
     return "Stock for $stock = ${abs(Random.nextInt())}"
 }
