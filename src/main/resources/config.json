@@ -1,9 +1,6 @@
 {
   "http": {
-    "getPort": 8080,
-    "setPort": 8081,
-    "updatePort": 8082,
-    "deletePort": 8083
+    "port": 8080
   },
   "mongo": {
     "connectionString": "mongodb://localhost:27017",
@@ -14,6 +11,7 @@
     "getDbMapAddress": "get.dbmap",
     "updateDocumentAddress": "update.document",
     "deleteDocumentAddress": "delete.document",
-    "listDocumentsAddress": "list.documents"
+    "listDocumentsAddress": "list.documents",
+    "createDocumentAddress": "create.document"
   }
 }

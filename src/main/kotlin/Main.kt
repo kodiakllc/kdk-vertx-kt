@@ -8,7 +8,11 @@ import io.vertx.core.DeploymentOptions
 fun main() {
     val vertx = Vertx.vertx()
 
+    // Print the current working directory and classpath
+    println("Current working directory: ${System.getProperty("user.dir")}")
+    println("Classpath: ${System.getProperty("java.class.path")}")
 
+    // Configuration retrieval from the classpath
     val store = ConfigStoreOptions()
         .setType("file")
         .setFormat("json")
@@ -23,32 +27,40 @@ fun main() {
             val config = ar.result()
             println("Loaded configuration: $config")
             val options = DeploymentOptions().setConfig(config)
-            vertx.deployVerticle(CreateVerticle::class.java.name, options) { res ->
+            vertx.deployVerticle(CentralVerticle::class.java.name, options) { res ->
                 if (res.succeeded()) {
-                    println("CreateVerticle deployed successfully.")
+                    println("CentralVerticle deployed successfully.")
+                    // Deploy CRUD Verticles after CentralVerticle
+                    vertx.deployVerticle(CreateVerticle::class.java.name, options) { res ->
+                        if (res.succeeded()) {
+                            println("CreateVerticle deployed successfully.")
+                        } else {
+                            println("Failed to deploy CreateVerticle: ${res.cause()}")
+                        }
+                    }
+                    vertx.deployVerticle(ReadVerticle::class.java.name, options) { res ->
+                        if (res.succeeded()) {
+                            println("ReadVerticle deployed successfully.")
+                        } else {
+                            println("Failed to deploy ReadVerticle: ${res.cause()}")
+                        }
+                    }
+                    vertx.deployVerticle(UpdateVerticle::class.java.name, options) { res ->
+                        if (res.succeeded()) {
+                            println("UpdateVerticle deployed successfully.")
+                        } else {
+                            println("Failed to deploy UpdateVerticle: ${res.cause()}")
+                        }
+                    }
+                    vertx.deployVerticle(DeleteVerticle::class.java.name, options) { res ->
+                        if (res.succeeded()) {
+                            println("DeleteVerticle deployed successfully.")
+                        } else {
+                            println("Failed to deploy DeleteVerticle: ${res.cause()}")
+                        }
+                    }
                 } else {
-                    println("Failed to deploy CreateVerticle: ${res.cause()}")
-                }
-            }
-            vertx.deployVerticle(ReadVerticle::class.java.name, options) { res ->
-                if (res.succeeded()) {
-                    println("ReadVerticle deployed successfully.")
-                } else {
-                    println("Failed to deploy ReadVerticle: ${res.cause()}")
-                }
-            }
-            vertx.deployVerticle(UpdateVerticle::class.java.name, options) { res ->
-                if (res.succeeded()) {
-                    println("UpdateVerticle deployed successfully.")
-                } else {
-                    println("Failed to deploy UpdateVerticle: ${res.cause()}")
-                }
-            }
-            vertx.deployVerticle(DeleteVerticle::class.java.name, options) { res ->
-                if (res.succeeded()) {
-                    println("DeleteVerticle deployed successfully.")
-                } else {
-                    println("Failed to deploy DeleteVerticle: ${res.cause()}")
+                    println("Failed to deploy CentralVerticle: ${res.cause()}")
                 }
             }
         }
