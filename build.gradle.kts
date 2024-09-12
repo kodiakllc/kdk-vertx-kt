@@ -26,8 +26,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("io.github.microutils:kotlin-logging:2.1.21")
     implementation("ch.qos.logback:logback-classic:1.2.10")
-    // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    // Coroutines (updated version)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3") // Consider updating to latest stable version
     // Vert.x Core
     implementation("io.vertx:vertx-core:4.2.1")
     // Vert.x Web
@@ -40,20 +40,27 @@ dependencies {
     implementation("io.vertx:vertx-mongo-client:4.2.1")
     // Vert.x Config
     implementation("io.vertx:vertx-config:4.2.1")
-    // JUnit
-    testImplementation("io.vertx:vertx-junit5:4.2.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    // JUnit 5
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    // Vert.x JUnit 5
+    testImplementation("io.vertx:vertx-junit5:4.2.1")
     // MockK
     testImplementation("io.mockk:mockk:1.12.0")
-    // TestNG
-    testImplementation("org.testng:testng:7.7.0")
+    // Vert.x Unit
+    testImplementation("io.vertx:vertx-unit:4.2.1")
+    // Web Client for HTTP Testing
+    implementation("io.vertx:vertx-web-client:4.2.1")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "11"
     }
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 application {
