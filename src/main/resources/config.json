@@ -1,0 +1,17 @@
+{
+  "http": {
+    "port": 8080
+  },
+  "mongo": {
+    "connectionString": "mongodb://localhost:27017",
+    "dbName": "mydb"
+  },
+  "eventBus": {
+    "getDocumentAddress": "get.document",
+    "getDbMapAddress": "get.dbmap",
+    "updateDocumentAddress": "update.document",
+    "deleteDocumentAddress": "delete.document",
+    "listDocumentsAddress": "list.documents",
+    "createDocumentAddress": "create.document"
+  }
+}
